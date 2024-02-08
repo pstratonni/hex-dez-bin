@@ -50,6 +50,10 @@ const addDigit = (event) => {
     view.innerHTML = "0";
     resultValue.dez = resultValue.hex = resultValue.bin = "0";
     renderResults();
+    document.querySelector(".render-from-dez-to-hex").innerHTML = "";
+    document.querySelector(".render-from-dez-to-bin").innerHTML = "";
+    document.querySelector(".render-from-bin-to-dez").innerHTML = "";
+    document.querySelector(".render-from-bin-to-hex").innerHTML = "";
     return;
   }
   if (event.currentTarget.innerHTML == "⇐") {
@@ -178,6 +182,9 @@ const searchResultFromBin = () => {
 const searchResultFromHex = () => {
   resultValue.hex = inputValue;
   resultValue.dez = resultValue.bin = 0;
+  if (inputValue == "0") {
+    return;
+  }
   for (let i = 0; i < inputValue.length; i++) {
     let letter =
       hexLetters.indexOf(inputValue[inputValue.length - 1 - i]) !== -1
@@ -206,8 +213,12 @@ const searchResultFromHex = () => {
       }
       return binDigit;
     })
-    .join("")
+    .join("");
+  let idx = resultValue.bin.indexOf("1");
+  resultValue.bin = resultValue.bin
+    .substring(idx)
     .replace(/(\d)(?=(\d{4})+(\D|$))/g, "$1 ");
+  renderRoadFromHexToDez();
 };
 
 const renderResults = () => {
@@ -217,6 +228,9 @@ const renderResults = () => {
 };
 
 const renderRoadFromDez = (hex, bin) => {
+  if (resultValue.bin == "0") {
+    return;
+  }
   let hexLineResults = "";
   for (let i = 0; i < hex.dividend.length; i++) {
     hexLineResults =
@@ -253,6 +267,9 @@ const renderRoadFromDez = (hex, bin) => {
 };
 
 const renderRoadFromBinToDez = () => {
+  if (resultValue.bin == "0") {
+    return;
+  }
   let resultBlock = "";
   const resBin = resultValue.bin.split(" ").join("");
   for (let i = 0; i < resBin.length - 1; i++) {
@@ -285,6 +302,9 @@ const renderRoadFromBinToDez = () => {
 };
 
 const renderRoadFromBinToHex = () => {
+  if (resultValue.bin == "0") {
+    return;
+  }
   const resBin = resultValue.bin.split(" ");
   resBin[0] = "0".repeat(4 - resBin[0].length) + resBin[0];
 
@@ -327,6 +347,12 @@ const renderRoadFromBinToHex = () => {
     resRenderBin +
     `</div>
     <div class="res bh">${resBin.length > 1 ? resultValue.hex : ""}</div>`;
+};
+
+const renderRoadFromHexToDez = () => {
+  console.log(1)
+  const width = document.querySelector(".rank_hex-dez").offsetWidth;
+  document.querySelector(".render-from-hex-to-dez").style.width = width * 2 + "px";
 };
 
 for (let button of buttons) {
