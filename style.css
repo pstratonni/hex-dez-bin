@@ -1,0 +1,139 @@
+.display {
+  width: 1000px;
+  height: 50px;
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.board {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5px;
+}
+
+.result > div {
+  display: flex;
+  width: 500px;
+}
+.bin_result,
+.dez_result,
+.hex_result {
+  width: 80%;
+  padding-left: 10px;
+}
+
+.render-from-dez {
+  display: flex;
+  width: 800px;
+  justify-content: space-between;
+  font-size: 20px;
+}
+.render-from-dez-to-hex,
+.render-from-dez-to-bin {
+  width: 390px;
+  border-right: 3px solid #000;
+  padding-right: 5px;
+  position: relative;
+  
+}
+.line-result {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.dividend {
+  width: 40%;
+  text-align: right;
+}
+.rest {
+    width: 30%;
+}
+.res {
+  width: 100%;
+  text-align: center;
+}
+.arrow-left,
+.arrow-right {
+  position: absolute;
+  width: 10px;
+  height: 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  background-color: #000;
+}
+
+.arrow-left {
+  right: -4px;
+  transform: rotate(-45deg);
+  top: 3px;
+}
+.arrow-right {
+  right: -10px;
+  transform: rotate(45deg);
+  top: 3px;
+}
+.db,
+.dh {
+  margin: 2px;
+}
+
+.render-from-bin-to-dez {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  }
+.render-from-bin-to-dez .wrap{
+    display: flex;
+    margin-bottom: 20px;
+    }
+
+.rank_bin-dez{
+  width: 50px;
+
+}
+.rank_dez>span{
+  display: block;
+  margin: auto auto;
+}
+.rank_dez{
+  display: flex;
+}
+.rank_bin{
+  text-align: center;
+  margin: 10px;
+}
+
+.render-from-bin-to-hex{
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.render-from-bin-to-hex_wrap{
+display: flex;
+justify-content: center;
+}
+
+.render-from-bin-to-hex .wrap{
+  margin-bottom: 20px;
+  border-right: #000 2px solid;
+  }
+  .render-from-bin-to-hex .wrap:last-child{
+    border-right: none;
+  } 
+
+.wrap_rank{
+  margin-bottom: 10px;
+  display: flex;
+}
+.cross{
+  font-size: small;
+}
+
+.hidden {
+    display: none;
+  }

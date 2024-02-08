@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=Y, initial-scale=1.0" />
+    <title>Hex Bin Dec</title>
+    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="system">
+      <form class="system_radio">
+        <input
+          type="radio"
+          id="hex"
+          value="hex"
+          name="digit_system"
+          class="radio"
+        />
+        <label for="hex">HEX</label>
+        <input
+          type="radio"
+          id="dez"
+          value="dez"
+          name="digit_system"
+          class="radio"
+          checked
+        />
+        <label for="dez">DEC</label>
+        <input
+          type="radio"
+          id="bin"
+          value="bin"
+          name="digit_system"
+          class="radio"
+        />
+        <label for="bin">BIN</label>
+      </form>
+      <div class="display">0</div>
+      <div class="kye_board">
+        <div class="board bin hidden">
+          <button>0</button><button>1</button><button>&#8656;</button
+          ><button>&#x21bb;</button>
+        </div>
+        <div class="board dez">
+          <button>1</button><button>2</button> <button>3</button
+          ><button>4</button><button>5</button> <button>6</button
+          ><button>7</button><button>8</button> <button>9</button
+          ><button>0</button><button>&#8656;</button><button>&#x21bb;</button>
+        </div>
+        <div class="board hex hidden">
+          <button>0</button><button>1</button><button>2</button>
+          <button>3</button><button>4</button><button>5</button>
+          <button>6</button><button>7</button><button>8</button>
+          <button>9</button><button>A</button><button>B</button>
+          <button>C</button><button>D</button><button>E</button>
+          <button>F</button><button>&#8656;</button><button>&#x21bb;</button>
+        </div>
+      </div>
+      <div class="result">
+        <div>
+          <p>BIN:</p>
+          <p class="bin_result">-</p>
+        </div>
+        <div>
+          <p>DEC:</p>
+          <p class="dez_result">-</p>
+        </div>
+        <div>
+          <p>HEX:</p>
+          <p class="hex_result">-</p>
+        </div>
+      </div>
+      <div class="renderBlock">
+        <div class="render-from-dez dez table">
+          <div><div class="render-from-dez-to-hex"></div></div>
+          <div class="render-from-dez-to-bin"></div>
+        </div>
+        <div class="render-from-bin bin table">
+          <div class="render-from-bin-to-dez"></div>
+          <div class="render-from-bin-to-hex">
+            <div class="render-from-bin-to-hex_wrap">
+            <div class="wrap">
+              <div class="wrap_rank">
+              <div class="rank_bin-dez"><div class="rank_bin">1</div>
+                <div class="rank_dez">
+                  <span>1<span class="cross">&#x2715;</span>8</span><span>+</span>
+                </div>
+              </div>
+              <div class="rank_bin-dez"><div class="rank_bin">0</div>
+                <div class="rank_dez">
+                  <span>0<span class="cross">&#x2715;</span>4</span><span>+</span>
+                </div>
+              </div>
+              <div class="rank_bin-dez"><div class="rank_bin">0</div>
+                <div class="rank_dez">
+                  <span>0<span class="cross">&#x2715;</span>2</span><span>+</span>
+                </div>
+              </div>
+              <div class="rank_bin-dez"><div class="rank_bin">1</div>
+                <div class="rank_dez">
+                  <span>1<span class="cross">&#x2715;</span>1</span>
+                </div>
+              </div>
+              </div>
+              <div class="res bh">9</div>
+            </div>
+            <div class="wrap">
+              <div class="wrap_rank">
+              <div class="rank_bin-dez"><div class="rank_bin">1</div>
+                <div class="rank_dez">
+                  <span>1<span class="cross">&#x2715;</span>8</span><span>+</span>
+                </div>
+              </div>
+              <div class="rank_bin-dez"><div class="rank_bin">0</div>
+                <div class="rank_dez">
+                  <span>0<span class="cross">&#x2715;</span>4</span><span>+</span>
+                </div>
+              </div>
+              <div class="rank_bin-dez"><div class="rank_bin">0</div>
+                <div class="rank_dez">
+                  <span>0<span class="cross">&#x2715;</span>2</span><span>+</span>
+                </div>
+              </div>
+              <div class="rank_bin-dez"><div class="rank_bin">1</div>
+                <div class="rank_dez">
+                  <span>1<span class="cross">&#x2715;</span>1</span>
+                </div>
+              </div>
+            </div>
+              <div class="res bh">A(10)</div>
+            </div>
+          </div>
+            <div class="res bh">A(10)</div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
