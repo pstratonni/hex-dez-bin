@@ -82,7 +82,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   margin: 0 auto;
   margin-bottom: 50px;
@@ -90,12 +90,10 @@
 .render-from-bin-to-dez .wrap{
     display: flex;
     margin-bottom: 20px;
+
     }
 
-.rank_bin-dez{
-  width: 50px;
 
-}
 .rank_dez>span{
   display: block;
   margin: auto auto;
@@ -109,7 +107,7 @@
 }
 
 .render-from-bin-to-hex{
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 }
 
@@ -121,6 +119,8 @@ justify-content: center;
 .render-from-bin-to-hex .wrap{
   margin-bottom: 20px;
   border-right: #000 2px solid;
+  margin-right: 10px;
+  padding-right: 20px
   }
   .render-from-bin-to-hex .wrap:last-child{
     border-right: none;

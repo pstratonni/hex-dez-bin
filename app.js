@@ -261,9 +261,7 @@ const renderRoadFromBinToDez = () => {
       `<div class="rank_bin-dez"><div class="rank_bin">${
         resBin[i]
       }</div><div class="rank_dez">
-  <span>${
-    resBin[i]
-  }<span class="cross">&#x2715;</span>2<sup>${
+  <span>${resBin[i]}<span class="cross">&#x2715;</span>2<sup>${
         resBin.length - 1 - i
       }</sup></span><span>+</span></div></div>`;
   }
@@ -284,14 +282,52 @@ const renderRoadFromBinToDez = () => {
   resultBD.innerHTML = resultValue.dez;
   renderBlock.appendChild(resultBD);
   renderBlock.style.width = `${resBin.length * 50}px`;
-
 };
 
-const renderRoadFromBinToHex =()=>{
-  const resBin = resultValue.bin.split(' ')
-  resBin[0]='0'.repeat(4-resBin[0].length)+resBin[0]
-  
-}
+const renderRoadFromBinToHex = () => {
+  const resBin = resultValue.bin.split(" ");
+  resBin[0] = "0".repeat(4 - resBin[0].length) + resBin[0];
+
+  const resRenderBin = resBin
+    .map((substrBin, idx) => {
+      let resWrap = `<div class="wrap_rank">`;
+      for (let i = 0; i < substrBin.length; i++) {
+        resWrap =
+          resWrap +
+          `<div class="rank_bin-dez">
+          <div class="rank_bin">${substrBin[i]}</div>
+            <div class="rank_dez">
+              <span>${
+                substrBin[i]
+              }<span class="cross">&#x2715;</span>${Math.pow(
+            2,
+            3 - i
+          )}</span><span>${i === 3 ? "" : "+"}</span>
+          </div>
+        </div>`;
+      }
+      resWrap =
+        '<div class="wrap">' +
+        resWrap +
+        `</div>
+    <div class="res bh">${
+      hexLetters.indexOf(resultValue.hex[idx]) !== -1
+        ? resultValue.hex[idx] +
+          "(" +
+          (hexLetters.indexOf(resultValue.hex[idx]) + 10) +
+          ")"
+        : resultValue.hex[idx]
+    }</div></div>`;
+      return resWrap;
+    })
+    .join("");
+  const binHexTable = document.querySelector(".render-from-bin-to-hex");
+  binHexTable.innerHTML =
+    '<div class="render-from-bin-to-hex_wrap">' +
+    resRenderBin +
+    `</div>
+    <div class="res bh">${resBin.length > 1 ? resultValue.hex : ""}</div>`;
+};
 
 for (let button of buttons) {
   button.addEventListener("click", addDigit);
