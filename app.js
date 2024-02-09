@@ -54,6 +54,7 @@ const addDigit = (event) => {
     document.querySelector(".render-from-dez-to-bin").innerHTML = "";
     document.querySelector(".render-from-bin-to-dez").innerHTML = "";
     document.querySelector(".render-from-bin-to-hex").innerHTML = "";
+    document.querySelector(".render-from-hex-to-dez").innerHTML = "";
     return;
   }
   if (event.currentTarget.innerHTML == "⇐") {
@@ -90,7 +91,6 @@ const searchResult = (flag = true) => {
         /(\d)(?=(\d{3})+(\D|$))/g,
         "$1 "
       );
-
       searchResultFromDez();
       break;
     case "bin":
@@ -181,7 +181,7 @@ const searchResultFromBin = () => {
 
 const searchResultFromHex = () => {
   resultValue.hex = inputValue;
-  resultValue.dez = resultValue.bin = 0;
+  resultValue.dez = resultValue.bin = '0';
   if (inputValue == "0") {
     return;
   }
@@ -190,7 +190,7 @@ const searchResultFromHex = () => {
       hexLetters.indexOf(inputValue[inputValue.length - 1 - i]) !== -1
         ? hexLetters.indexOf(inputValue[inputValue.length - 1 - i]) + 10
         : +inputValue[inputValue.length - 1 - i];
-    resultValue.dez = resultValue.dez + letter * Math.pow(16, i);
+    resultValue.dez = +resultValue.dez + letter * Math.pow(16, i);
   }
   resultValue.dez = resultValue.dez
     .toString()
@@ -350,9 +350,43 @@ const renderRoadFromBinToHex = () => {
 };
 
 const renderRoadFromHexToDez = () => {
-  console.log(1)
+  if (resultValue.bin == "0") {
+    return;
+  }
+  let resultBlock = '<div class="wrap">';
+  for (i = 0; i < resultValue.hex.length; i++) {
+    resultBlock =
+      resultBlock +
+      `<div class="rank_hex-dez">
+          <div class="rank_hex">${
+            hexLetters.indexOf(resultValue.hex[i]) !== -1
+              ? resultValue.hex[i] +
+                "(" +
+                (hexLetters.indexOf(resultValue.hex[i]) + 10) +
+                ")"
+              : resultValue.hex[i]
+          }</div>
+          <div class="rank_dez">
+            <span>${
+              hexLetters.indexOf(resultValue.hex[i]) !== -1
+                ? hexLetters.indexOf(resultValue.hex[i]) + 10
+                : resultValue.hex[i]
+            }<span class="cross">&#x2715;</span>
+              16<sup>${resultValue.hex.length - 1 - i}</sup>${
+        i === resultValue.hex.length - 1 ? "" : "+"
+      }
+            </span>
+          </div>
+        </div>`;
+  }
+  resultBlock =
+    resultBlock +
+    `</div>
+    <div class="res hd">${resultValue.dez}</div>`;
+  document.querySelector(".render-from-hex-to-dez").innerHTML = resultBlock;
   const width = document.querySelector(".rank_hex-dez").offsetWidth;
-  document.querySelector(".render-from-hex-to-dez").style.width = width * 2 + "px";
+  document.querySelector(".render-from-hex-to-dez").style.width =
+    90 * resultValue.hex.length  + "px";
 };
 
 for (let button of buttons) {

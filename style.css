@@ -1,9 +1,54 @@
+body {
+  font-family: "Nunito", sans-serif;
+  box-sizing: border-box;
+  background-color: #b3c9b9;
+  color: #2f3d33;
+}
+
+form {
+  font-weight: bold;
+}
+
 .display {
   width: 1000px;
-  height: 50px;
+  min-height: 50px;
   font-size: 50px;
   font-weight: bold;
   margin-bottom: 20px;
+}
+
+button {
+  border-radius: 10px;
+  background-color: #1899d6;
+  color: white;
+  border: none;
+  border-bottom: solid 3px transparent;
+  border-right: solid 3px transparent;
+  cursor: pointer;
+  font-size: 20px;
+  box-shadow: inset -3px -3px 9px rgba(255, 255, 255, 0.25),
+    inset 0px 3px 9px rgba(255, 255, 255, 0.3),
+    inset 0px 1px 1px rgba(255, 255, 255, 0.6),
+    inset 0px -8px 36px rgba(0, 0, 0, 0.3),
+    inset 0px 1px 5px rgba(255, 255, 255, 0.6), 2px 19px 31px rgba(0, 0, 0, 0.2);
+  background-image: radial-gradient(
+      93% 87% at 87% 89%,
+      rgba(0, 0, 0, 0.23) 0%,
+      transparent 86.18%
+    ),
+    radial-gradient(
+      66% 66% at 26% 20%,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0) 69.79%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  width: 40px;
+  height: 27px;
+}
+
+button:hover {
+  transform: scale(0.9);
+  border: none;
 }
 
 .board {
@@ -15,6 +60,8 @@
 .result > div {
   display: flex;
   width: 500px;
+  font-weight: bold;
+  font-size: 20px;
 }
 .bin_result,
 .dez_result,
@@ -28,6 +75,7 @@
   width: 800px;
   justify-content: space-between;
   font-size: 20px;
+  font-weight: bold;
 }
 .render-from-dez-to-hex,
 .render-from-dez-to-bin {
@@ -134,8 +182,16 @@
   margin-bottom: 20px;
 }
 
-.render-from-hex-to-dez{
+.rank_hex-dez {
+  margin-right: 10px;
+}
+
+.render-from-hex-to-dez {
   /* width:161px; */
+}
+
+.rank_hex {
+  display: flex;
 }
 
 .cross {
