@@ -386,7 +386,7 @@ const renderRoadFromHexToDez = () => {
   document.querySelector(".render-from-hex-to-dez").innerHTML = resultBlock;
   const width = document.querySelector(".rank_hex-dez").offsetWidth;
   document.querySelector(".render-from-hex-to-dez").style.width =
-    90 * resultValue.hex.length  + "px";
+    100 * resultValue.hex.length  + "px";
 };
 
 for (let button of buttons) {
