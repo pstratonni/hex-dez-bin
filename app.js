@@ -181,7 +181,7 @@ const searchResultFromBin = () => {
 
 const searchResultFromHex = () => {
   resultValue.hex = inputValue;
-  resultValue.dez = resultValue.bin = '0';
+  resultValue.dez = resultValue.bin = "0";
   if (inputValue == "0") {
     return;
   }
@@ -219,6 +219,7 @@ const searchResultFromHex = () => {
     .substring(idx)
     .replace(/(\d)(?=(\d{4})+(\D|$))/g, "$1 ");
   renderRoadFromHexToDez();
+  renderRoadFromHexToBin();
 };
 
 const renderResults = () => {
@@ -386,7 +387,43 @@ const renderRoadFromHexToDez = () => {
   document.querySelector(".render-from-hex-to-dez").innerHTML = resultBlock;
   const width = document.querySelector(".rank_hex-dez").offsetWidth;
   document.querySelector(".render-from-hex-to-dez").style.width =
-    100 * resultValue.hex.length  + "px";
+    100 * resultValue.hex.length + "px";
+};
+
+const renderRoadFromHexToBin = () => {
+  const resultValueArray = resultValue.hex.split("");
+
+  const renderValue = resultValueArray
+    .map((digit) => {
+      let dividend =
+        hexLetters.indexOf(digit) !== -1
+          ? hexLetters.indexOf(digit) + 10
+          : +digit;
+      let binRankResult = "";
+      let renderResult = `<div class="render-rank-from-hex-to-bin">`;
+      for (let i = 1; i <= 4; i++) {
+        let quotient = Math.trunc(dividend / 2);
+        renderResult =
+          renderResult +
+          `<div class="line-result hb"><p class="dividend dh">${dividend}${
+            dividend > 9 ? "(" + hexLetters[dividend - 10] + ")" : ""
+          } : 2 =</p><p class="quotient dh">${quotient}</p><p class="rest dh">Rest ${
+            dividend - quotient * 2
+          }</p></div>`;
+        binRankResult = dividend - quotient * 2 + binRankResult;
+        dividend = quotient;
+      }
+      renderResult =
+        renderResult +
+        `<div class="res hb">${binRankResult}</div>
+      <div class="arrow-left">
+      </div><div class="arrow-right"></div>
+      </div>`;
+      return renderResult;
+    })
+    .join();
+  document.querySelector(".render-from-hex-to-bin").innerHTML =
+    "<div class='wrap'>" + renderValue + "</div>" +`<div class="res hd">${resultValue.bin}</div>`;
 };
 
 for (let button of buttons) {
