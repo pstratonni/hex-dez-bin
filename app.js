@@ -289,7 +289,7 @@ const renderRoadFromBinToDez = () => {
       resultValue.bin[resultValue.bin.length - 1]
     }</div><div class="rank_dez">
   <span>${
-    resultValue.bin[resBin.length - 1]
+    resultValue.bin[resultValue.bin.length - 1]
   }<span class="cross">&#x2715;</span>2<sup>0</sup></span></div></div>`;
   const wrap = `<div class="wrap">${resultBlock}</div>`;
   const renderBlock = document.querySelector(".render-from-bin-to-dez");
