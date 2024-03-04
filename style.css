@@ -7,12 +7,10 @@ body {
 
 form {
   font-weight: bold;
-  position: relative;
 }
 
 .radio{
-position: absolute;
-top: -1000px;
+display: none;
 }
 
 .label{
