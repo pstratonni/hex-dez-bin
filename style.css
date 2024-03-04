@@ -7,6 +7,20 @@ body {
 
 form {
   font-weight: bold;
+  position: relative;
+}
+
+.radio{
+position: absolute;
+top: -1000px;
+}
+
+.label{
+  cursor: pointer;
+}
+
+.active{
+  color :#1899d6;
 }
 
 .display {

@@ -6,17 +6,30 @@ const resultValue = {
   dez: "0",
   bin: "0",
 };
+const delay = 500
 
 const radios = document.querySelectorAll(".radio");
 const buttons = document.querySelectorAll("button");
 const boards = document.querySelectorAll(".board");
 const tables = document.querySelectorAll(".table");
+const lables = document.querySelectorAll(".label")
 
 const changeSystem = (event) => {
   currentSystem = event.currentTarget.id;
+  activeSystem();
   changeBoard();
   changeTable();
 };
+
+const activeSystem = ()=>{
+  for (let lable of lables) {
+    if (lable.htmlFor!==currentSystem) {
+      lable.classList.remove("active");
+    } else {
+      lable.classList.add("active");
+    }
+  }
+}
 
 const changeBoard = () => {
   for (let board of boards) {
@@ -64,8 +77,7 @@ const addDigit = (event) => {
       resultValue.dez = resultValue.hex = resultValue.bin = "0";
     }
     view.innerHTML = inputValue;
-    searchResult(false);
-    renderResults();
+    searchResult(false)
     return;
   }
   if (inputValue == "0") {
@@ -75,8 +87,7 @@ const addDigit = (event) => {
   }
   view.innerHTML = inputValue;
   resultValue[currentSystem] = inputValue;
-  searchResult();
-  renderResults();
+  searchResult()
 };
 
 const searchResult = (flag = true) => {
@@ -92,6 +103,7 @@ const searchResult = (flag = true) => {
         "$1 "
       );
       searchResultFromDez();
+      renderResults();
       break;
     case "bin":
       if (flag) {
@@ -99,6 +111,7 @@ const searchResult = (flag = true) => {
       }
       view.innerHTML = inputValue.replace(/(\d)(?=(\d{4})+(\D|$))/g, "$1 ");
       searchResultFromBin();
+      renderResults();
       break;
     case "hex":
       if (flag) {
@@ -106,6 +119,7 @@ const searchResult = (flag = true) => {
       }
       view.innerHTML = inputValue;
       searchResultFromHex();
+      renderResults();
       break;
   }
 };
