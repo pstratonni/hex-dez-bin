@@ -11,7 +11,9 @@
       rel="stylesheet"
     />
     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./normalize.css" />
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./styles_ip.css" />
   </head>
   <body>
     <div class="system">
@@ -32,7 +34,7 @@
           class="radio"
           checked
         />
-        <label for="dez" class="label active">DEC</label>
+        <label for="dez" class="label">DEC</label>
         <input
           type="radio"
           id="bin"
@@ -41,14 +43,43 @@
           class="radio"
         />
         <label for="bin" class="label">BIN</label>
+        <input
+          type="radio"
+          id="ipv4"
+          value="ipv4"
+          name="digit_system"
+          class="radio"
+        />
+        <label for="ipv4" class="label active">IPv4</label>
       </form>
-      <div class="display">0</div>
+      <div class="display hidden">0</div>
+      <div class="display_ipv4 ">
+        <div class="display_octet">
+          <input type="text" id="o_1" class="octet" maxlength="3" placeholder="0">
+        </div>
+        <p>.</p>
+        <div class="display_octet">
+          <input type="text" id="o_2" class="octet" maxlength="3" placeholder="0">
+        </div>
+        <p>.</p>
+        <div class="display_octet">
+          <input type="text" id="o_3" class="octet" maxlength="3" placeholder="0">
+        </div>
+        <p>.</p>
+        <div class="display_octet">
+          <input type="text" id="o_4" class="octet" maxlength="3" placeholder="0">
+        </div>
+        <p>/</p>
+        <div class="display_octet">
+          <input type="text" class="prefix" maxlength="2" placeholder="24">
+        </div>
+      </div>
       <div class="kye_board">
         <div class="board bin hidden">
           <button>0</button><button>1</button><button>&#8656;</button
           ><button>&#x21bb;</button>
         </div>
-        <div class="board dez">
+        <div class="board dez hidden">
           <button>1</button><button>2</button> <button>3</button
           ><button>4</button><button>5</button> <button>6</button
           ><button>7</button><button>8</button> <button>9</button
@@ -63,7 +94,7 @@
           <button>F</button><button>&#8656;</button><button>&#x21bb;</button>
         </div>
       </div>
-      <div class="result">
+      <div class="result hidden">
         <div>
           <p>BIN:</p>
           <p class="bin_result">0</p>
@@ -78,7 +109,8 @@
         </div>
       </div>
       <div class="renderBlock">
-        <div class="render-from-dez dez table"><div class="render-from-dez-to-hex"></div>
+        <div class="render-from-dez dez table">
+          <div class="render-from-dez-to-hex"></div>
           <div class="render-from-dez-to-bin"></div>
         </div>
         <div class="render-from-bin bin table">

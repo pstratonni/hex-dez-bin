@@ -1,0 +1,38 @@
+.display_ipv4{
+    display: flex;
+    justify-content: space-between;
+    width: 670px;
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
+  .octet, .prefix{
+    font-size: 50px;
+    font-weight: bold;
+    margin-bottom: 20px; 
+    font-family: "Nunito", sans-serif;
+    display: block;
+    padding: 0px 10px;
+    color: #2f3d33;
+    border-radius: 5px;
+    background-color: #cce7d4;
+  }
+
+  .octet{ 
+    width: 90px;
+  }
+  
+  .prefix{ 
+    width: 65px;
+  }
+  
+  p{
+    margin: 0;
+  }
+
+  .hidden {
+    display: none;
+  }
+  

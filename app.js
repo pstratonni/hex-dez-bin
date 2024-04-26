@@ -1,4 +1,4 @@
-let currentSystem = "dez";
+let currentSystem = "ipv4";
 const hexLetters = ["A", "B", "C", "D", "E", "F"];
 let inputValue = "0";
 const resultValue = {
@@ -7,12 +7,17 @@ const resultValue = {
   bin: "0",
 };
 const delay = 500
+const octetsValue=[0,0,0,0]
+let prefixValue=24
 
 const radios = document.querySelectorAll(".radio");
 const buttons = document.querySelectorAll("button");
 const boards = document.querySelectorAll(".board");
 const tables = document.querySelectorAll(".table");
 const lables = document.querySelectorAll(".label")
+const octets = document.querySelectorAll(".octet")
+const prefix = document.querySelector(".prefix")
+console.log(octets);
 
 const changeSystem = (event) => {
   currentSystem = event.currentTarget.id;
@@ -38,6 +43,17 @@ const changeBoard = () => {
     } else {
       board.classList.add("hidden");
     }
+  }
+  if (currentSystem == "ipv4"){
+    document.querySelector(".display").classList.add("hidden")
+    document.querySelector(".result").classList.add("hidden")
+    document.querySelector(".display_ipv4").classList.remove("hidden")
+    return
+  }
+  else{
+    document.querySelector(".display").classList.remove("hidden")
+    document.querySelector(".result").classList.remove("hidden")
+    document.querySelector(".display_ipv4").classList.add("hidden")
   }
   inputValue = resultValue[currentSystem];
   document.querySelector(".display").innerHTML = inputValue;
@@ -445,4 +461,14 @@ for (let button of buttons) {
 }
 for (let radio of radios) {
   radio.addEventListener("click", changeSystem);
+}
+
+
+const addNumber = (event) =>{
+  console.log(event.target.value);
+}
+
+
+for (let octet of octets){
+  octet.addEventListener("input", addNumber)
 }
