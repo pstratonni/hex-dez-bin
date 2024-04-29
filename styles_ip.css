@@ -15,7 +15,7 @@
     font-family: "Nunito", sans-serif;
     display: block;
     padding: 0px 10px;
-    color: #2f3d33;
+    color: var(--text);
     border-radius: 5px;
     background-color: #cce7d4;
   }
@@ -32,17 +32,36 @@
     margin: 0;
   }
 
-  .render-ipv4_bin-octet{
+  .render-ipv4{
+    display: flex;
+  }
+
+  .st{
     display: flex;
     font-size: 50px;
     font-weight: bold;
-    
+  }
+
+  .wrap_title, .wrap_content-bin{
+    margin-right: 50px;
   }
 
   .point{
     padding:0 10px
   }
 
+  .mb{
+    margin-bottom: 20px;
+  }
+
+  .title-ip{
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  .render-ipv4_dec-octet, .render-fist_bin{
+    color: var(--back);
+  }
 
   .hidden {
     display: none;

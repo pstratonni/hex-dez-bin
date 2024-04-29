@@ -139,22 +139,43 @@
         </div>
       </div>
       <div class="renderBlock">
-        <div class="render-from-dez dez table">
+        <div class="render-from-dez dez table hidden">
           <div class="render-from-dez-to-hex"></div>
           <div class="render-from-dez-to-bin"></div>
         </div>
-        <div class="render-from-bin bin table">
+        <div class="render-from-bin bin table hidden">
           <div class="render-from-bin-to-dez"></div>
           <div class="render-from-bin-to-hex"></div>
         </div>
-        <div class="render-from-hex hex table">
+        <div class="render-from-hex hex table hidden">
           <div class="render-from-hex-to-dez"></div>
           <div class="render-from-hex-to-bin"></div>
         </div>
         <div class="render-ipv4 ipv4 table">
-          <div class="render-ipv4_bin-octet">
+          <div class="wrap_title">
+            <div class="title-ip mb">IPv4</div>
+            <div class="title-ip mb">Mask</div>
+            <div class="title-ip mb">Netz ID</div>
+            <div class="title-ip mb">First Host</div>
+            <div class="title-ip mb">Latest Host</div>
+            <div class="title-ip mb">Broadcast</div>
           </div>
-          <div class="render-mask"></div>
+          <div class="wrap_content-bin">
+            <div class="render-ipv4_bin-octet st mb"></div>
+            <div class="render-mask_bin st mb"></div>
+            <div class="render-netz_bin st mb"></div>
+            <div class="render-fist_bin st mb">0</div>
+            <div class="render-latest_bin st mb"></div>
+          </div>
+          <div class="wrap_content-dec">
+            <div class="render-ipv4_dec-octet st mb">0</div>
+            <div class="render-mask_dec st mb"></div>                 
+            <div class="render-netz_dec st mb"></div> 
+            <div class="render-first_dec st mb"></div>
+            <div class="render-latest_dec st mb"></div>
+            <div class="render-broadcast_dec st mb"></div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
