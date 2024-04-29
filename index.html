@@ -53,25 +53,55 @@
         <label for="ipv4" class="label active">IPv4</label>
       </form>
       <div class="display hidden">0</div>
-      <div class="display_ipv4 ">
+      <div class="display_ipv4">
         <div class="display_octet">
-          <input type="text" id="o_1" class="octet" maxlength="3" placeholder="0">
+          <input
+            type="text"
+            id="o_1"
+            class="octet"
+            maxlength="3"
+            placeholder="0"
+          />
         </div>
         <p>.</p>
         <div class="display_octet">
-          <input type="text" id="o_2" class="octet" maxlength="3" placeholder="0">
+          <input
+            type="text"
+            id="o_2"
+            class="octet"
+            maxlength="3"
+            placeholder="0"
+          />
         </div>
         <p>.</p>
         <div class="display_octet">
-          <input type="text" id="o_3" class="octet" maxlength="3" placeholder="0">
+          <input
+            type="text"
+            id="o_3"
+            class="octet"
+            maxlength="3"
+            placeholder="0"
+          />
         </div>
         <p>.</p>
         <div class="display_octet">
-          <input type="text" id="o_4" class="octet" maxlength="3" placeholder="0">
+          <input
+            type="text"
+            id="o_4"
+            class="octet"
+            maxlength="3"
+            placeholder="0"
+          />
         </div>
         <p>/</p>
         <div class="display_octet">
-          <input type="text" class="prefix" maxlength="2" placeholder="24">
+          <input
+            type="text"
+            id="prefix"
+            class="prefix"
+            maxlength="2"
+            placeholder="24"
+          />
         </div>
       </div>
       <div class="kye_board">
@@ -118,13 +148,17 @@
           <div class="render-from-bin-to-hex"></div>
         </div>
         <div class="render-from-hex hex table">
-          <div class="render-from-hex-to-dez">
+          <div class="render-from-hex-to-dez"></div>
+          <div class="render-from-hex-to-bin"></div>
+        </div>
+        <div class="render-ipv4 ipv4 table">
+          <div class="render-ipv4_bin-octet">
           </div>
-          <div class="render-from-hex-to-bin">
-          </div>
+          <div class="render-mask"></div>
         </div>
       </div>
     </div>
     <script src="./app.js"></script>
+    <script src="./app_ip.js"></script>
   </body>
 </html>
