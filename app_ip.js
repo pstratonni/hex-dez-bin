@@ -44,7 +44,8 @@ const searchResultIP = () => {
   const octetsValueBin = [];
   for (let i = 0; i < 4; i++) {
     if (i !== idxOctet) {
-      octetsValueBin.push(octetsValue[i]);
+      const octet = `<p class="render-octet">${octetsValue[i]}</p>`;
+      octetsValueBin.push(octet);
     } else {
       let bin = octetsValue[i];
       let strValue = "";
@@ -57,12 +58,17 @@ const searchResultIP = () => {
         strValue = 0 + strValue;
       }
       octetsValueBin.push(
-        strValue.slice(0, position) + "|" + strValue.slice(position)
+        `<p class="render-octet-bin">${strValue.slice(0, position)}
+          <span class='pipe'>|</span>
+          ${strValue.slice(position)}</p>`
       );
     }
   }
   document.querySelector(".render-ipv4_bin-octet").innerHTML =
-    octetsValueBin.join(".") + " / " + prefixValue;
+    octetsValueBin.join("<p class='point'>.</p>") +
+    "<p class='point'>/</p>" +
+    prefixValue;
+  searchMask(idxOctet, position);
 };
 
 const searchOctet = () => {
@@ -74,6 +80,33 @@ const searchOctet = () => {
     return [2, prefixValue - 16];
   } else {
     return [3, prefixValue - 24];
+  }
+};
+
+const searchMask = (idxOctet, position) => {
+  const mask = [];
+  const maskBin = [];
+  let binOctet = "";
+  let decOctet = 0;
+  for (let i = 0; i < 4; i++) {
+    if (i < idxOctet) {
+      mask.push("255");
+      maskBin.push("255");
+    } else if (i === idxOctet) {
+      for (let i = 1; i < 9; i++) {
+        if (i <= position) {
+          binOctet = binOctet + 1;
+          decOctet = decOctet + Math.pow(2, 8 - i);
+        } else {
+          binOctet = binOctet + "0";
+        }
+      }
+      mask.push(str(decOctet))
+      maskBin.push(binOctet);
+    } else {
+      mask.push("0");
+      maskBin.push("0");
+    }
   }
 };
 

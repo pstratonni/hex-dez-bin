@@ -6,18 +6,13 @@ const resultValue = {
   dez: "0",
   bin: "0",
 };
-const delay = 500
-const octetsValue=[0,0,0,0]
-let prefixValue=24
+const delay = 500;
 
 const radios = document.querySelectorAll(".radio");
 const buttons = document.querySelectorAll("button");
 const boards = document.querySelectorAll(".board");
 const tables = document.querySelectorAll(".table");
-const lables = document.querySelectorAll(".label")
-const octets = document.querySelectorAll(".octet")
-const prefix = document.querySelector(".prefix")
-console.log(octets);
+const labels = document.querySelectorAll(".label");
 
 const changeSystem = (event) => {
   currentSystem = event.currentTarget.id;
@@ -26,15 +21,15 @@ const changeSystem = (event) => {
   changeTable();
 };
 
-const activeSystem = ()=>{
-  for (let lable of lables) {
-    if (lable.htmlFor!==currentSystem) {
-      lable.classList.remove("active");
+const activeSystem = () => {
+  for (let label of labels) {
+    if (label.htmlFor !== currentSystem) {
+      label.classList.remove("active");
     } else {
-      lable.classList.add("active");
+      label.classList.add("active");
     }
   }
-}
+};
 
 const changeBoard = () => {
   for (let board of boards) {
@@ -44,16 +39,15 @@ const changeBoard = () => {
       board.classList.add("hidden");
     }
   }
-  if (currentSystem == "ipv4"){
-    document.querySelector(".display").classList.add("hidden")
-    document.querySelector(".result").classList.add("hidden")
-    document.querySelector(".display_ipv4").classList.remove("hidden")
-    return
-  }
-  else{
-    document.querySelector(".display").classList.remove("hidden")
-    document.querySelector(".result").classList.remove("hidden")
-    document.querySelector(".display_ipv4").classList.add("hidden")
+  if (currentSystem == "ipv4") {
+    document.querySelector(".display").classList.add("hidden");
+    document.querySelector(".result").classList.add("hidden");
+    document.querySelector(".display_ipv4").classList.remove("hidden");
+    return;
+  } else {
+    document.querySelector(".display").classList.remove("hidden");
+    document.querySelector(".result").classList.remove("hidden");
+    document.querySelector(".display_ipv4").classList.add("hidden");
   }
   inputValue = resultValue[currentSystem];
   document.querySelector(".display").innerHTML = inputValue;
@@ -63,7 +57,9 @@ const changeTable = () => {
   for (let table of tables) {
     if (table.classList.contains(currentSystem)) {
       table.classList.remove("hidden");
-      searchResult();
+      if (currentSystem !== "ipv4") {
+        searchResult();
+      }
     } else {
       table.classList.add("hidden");
     }
@@ -93,7 +89,7 @@ const addDigit = (event) => {
       resultValue.dez = resultValue.hex = resultValue.bin = "0";
     }
     view.innerHTML = inputValue;
-    searchResult(false)
+    searchResult(false);
     return;
   }
   if (inputValue == "0") {
@@ -103,7 +99,7 @@ const addDigit = (event) => {
   }
   view.innerHTML = inputValue;
   resultValue[currentSystem] = inputValue;
-  searchResult()
+  searchResult();
 };
 
 const searchResult = (flag = true) => {
@@ -453,7 +449,10 @@ const renderRoadFromHexToBin = () => {
     })
     .join();
   document.querySelector(".render-from-hex-to-bin").innerHTML =
-    "<div class='wrap'>" + renderValue + "</div>" +`<div class="res hd">${resultValue.bin}</div>`;
+    "<div class='wrap'>" +
+    renderValue +
+    "</div>" +
+    `<div class="res hd">${resultValue.bin}</div>`;
 };
 
 for (let button of buttons) {
@@ -461,14 +460,4 @@ for (let button of buttons) {
 }
 for (let radio of radios) {
   radio.addEventListener("click", changeSystem);
-}
-
-
-const addNumber = (event) =>{
-  console.log(event.target.value);
-}
-
-
-for (let octet of octets){
-  octet.addEventListener("input", addNumber)
 }
