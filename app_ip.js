@@ -1,8 +1,13 @@
 const octetsValue = [undefined, undefined, undefined, undefined];
 let prefixValue = undefined;
+let isSubnet = "no"
+let amountValue = undefined
 
 const octets = document.querySelectorAll(".octet");
 const prefix = document.querySelector(".prefix");
+const subLabels = document.querySelectorAll(".label-sub")
+const radiosSubnet = document.querySelectorAll(".subnet_radio")
+const amountSubnet = document.querySelector("#sub")
 
 const addIPOctet = (event) => {
   const elem = event.target;
@@ -32,30 +37,28 @@ const addPrefix = (event) => {
   }
 };
 
-const testUndefined = () => {
-  if (octetsValue.indexOf(undefined) !== -1 || prefixValue === undefined) {
+const testUndefined = (flag=true) => {
+  if ((octetsValue.indexOf(undefined) !== -1 || prefixValue === undefined || !flag)
+    && (flag||amountValue===undefined || +amountValue===1)) {
     return;
+  };
+  if (flag){
+    const [idxOctet, position] = searchOctet();
+    searchResultIP(idxOctet, position)
+  } else {
+    searchSubnet()
   }
-  searchResultIP();
+  
 };
 
-const searchResultIP = () => {
-  const [idxOctet, position] = searchOctet();
+const searchResultIP = (idxOctet, position) => {
   const octetsValueBin = [];
   let strValue = "";
   for (let i = 0; i < 4; i++) {
     if (i !== idxOctet) {
       octetsValueBin.push(octetsValue[i]);
     } else {
-      let bin = octetsValue[i];
-      while (bin > 0) {
-        strValue = (bin % 2) + strValue;
-        bin = Math.trunc(bin / 2);
-      }
-      const length = strValue.length;
-      for (let i = 0; i < 8 - length; i++) {
-        strValue = 0 + strValue;
-      }
+      strValue = searchStrValue(octetsValue[i]);
       octetsValueBin.push(`${strValue.slice(0, position)}<span class='pipe'>|</span>${strValue.slice(position)}`
       );
     }
@@ -80,15 +83,28 @@ const searchResultIP = () => {
   searchQuantityHosts()
 };
 
-const searchOctet = () => {
-  if (prefixValue <= 8) {
-    return [0, prefixValue];
-  } else if (prefixValue <= 16) {
-    return [1, prefixValue - 8];
-  } else if (prefixValue <= 24) {
-    return [2, prefixValue - 16];
+const searchStrValue = (bin) => {
+  let strValue = ""
+  while (bin > 0) {
+    strValue = (bin % 2) + strValue;
+    bin = Math.trunc(bin / 2);
+  }
+  const length = strValue.length;
+  for (let i = 0; i < 8 - length; i++) {
+    strValue = 0 + strValue;
+  }
+  return strValue
+}
+
+const searchOctet = (prefix = prefixValue) => {
+  if (prefix <= 8) {
+    return [0, prefix];
+  } else if (prefix <= 16) {
+    return [1, prefix - 8];
+  } else if (prefix <= 24) {
+    return [2, prefix - 16];
   } else {
-    return [3, prefixValue - 24];
+    return [3, prefix - 24];
   }
 };
 
@@ -223,8 +239,54 @@ const searchBroadcast = (broadcast=octetsValue) => {
 
 const searchQuantityHosts = ()=> {
   const pow = 32 - +prefixValue
-  console.log(pow);
   document.querySelector('.render-hosts_dec').innerHTML = (pow==0) ? 0 : Math.pow(2, pow)-2
+}
+
+const activeSubnet = (event) => {
+  isSubnet = event.currentTarget.id;
+  for (let label of subLabels) {
+    if (label.htmlFor !== isSubnet) {
+      label.classList.remove("active");
+    } else {
+      label.classList.add("active");
+    }
+  }
+  if (isSubnet==="no"){
+    document.querySelector("#sub").classList.add("hidden")
+    document.querySelector(".render-ipv4").classList.remove("hidden")
+    document.querySelector(".render-subnetting").classList.add("hidden")
+  } else {
+    document.querySelector("#sub").classList.remove("hidden")
+    document.querySelector(".render-ipv4").classList.add("hidden")
+    document.querySelector(".render-subnetting").classList.remove("hidden")
+  }
+}
+
+const createSubnet = (event) => {
+  const elem = event.target;
+  const hosts = 10000000000000
+  if (/^\d+$/.test(elem.value) && +elem.value <= hosts && +elem.value > 1){
+    document.querySelector(`#${elem.id}`).style.color = "#2f3d33"
+    amountValue = +elem.value
+    testUndefined(false);
+  } else{
+    document.querySelector(`#${elem.id}`).style.color = "red"
+    amountValue = undefined
+    testUndefined(false);
+  }
+}
+
+const searchSubnet = () => {
+  const subPrefix = searchSubPrefix()
+  const [idxOctet, position] = searchOctet(+prefixValue + subPrefix);
+  console.log(idxOctet, position);
+}
+
+const searchSubPrefix = () => {
+  let subPrefix = Math.log(+amountValue)/Math.log(2)
+  if (!subPrefix){return undefined}
+  (subPrefix % 1)===0 ? "" : subPrefix = Math.trunc(subPrefix / 1) + 1;
+  return subPrefix
 }
 
 for (let octet of octets) {
@@ -232,3 +294,9 @@ for (let octet of octets) {
 }
 
 prefix.addEventListener("input", addPrefix);
+
+for (let radio of radiosSubnet){
+  radio.addEventListener("click", activeSubnet);
+}
+
+amountSubnet.addEventListener("input", createSubnet)

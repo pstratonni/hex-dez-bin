@@ -28,6 +28,15 @@
     width: 65px;
   }
   
+  .subnet_value {
+    font-family: "Nunito", sans-serif;
+    color: var(--text);
+    border-radius: 5px;
+    background-color: #cce7d4;
+    height: 20px;
+    width: 50px;
+  }
+
   p{
     margin: 0;
   }
@@ -61,6 +70,33 @@
 
   .render-ipv4_dec-octet, .render-fist_bin{
     color: var(--back);
+  }
+
+  .subnet{
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .subnet_value{
+    color: var(--text);
+    font-weight: bold;
+  }
+
+  .subnet-table{
+    border-collapse: collapse;
+  }
+
+  thead{
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  th{
+    width: 300px;
+    border: var(--text) solid 2px;
+    
   }
 
   .hidden {

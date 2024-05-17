@@ -103,6 +103,18 @@
             placeholder="24"
           />
         </div>
+        
+      </div>
+      <div class="subnet mb">
+        <form class="form-sub">
+          Subnetting 
+          <label for="yes" class="label-sub">YES</label> 
+          <input class="subnet_radio" id="yes" type="radio" value="yes" name="subnet"> 
+          / 
+          <label for="no" class="label-sub active">NO</label> 
+          <input class="subnet_radio" id="no" type="radio" value="no" name="subnet">  
+          <input class="subnet_value hidden" type="text" id="sub" placeholder="4"> 
+        </form>
       </div>
       <div class="kye_board">
         <div class="board bin hidden">
@@ -178,6 +190,19 @@
             <div class="render-broadcast_dec st mb"></div>
             <div class="render-hosts_dec st mb"></div>
           </div>
+        </div>
+        <div class="render-subnetting subnetting table hidden">
+          <table class="subnet-table">
+            <thead>
+              <tr>
+                <th>NetIP</th>
+                <th>FirstIP</th>
+                <th>LatestIP</th>
+                <th>Broadcast</th>
+              </tr>
+            </thead>
+            <tbody class="subnet-content"></tbody>
+          </table>
         </div>
         </div>
       </div>
