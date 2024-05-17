@@ -70,12 +70,14 @@ const searchResultIP = () => {
     searchFirstHost(netz)
     const latestHost = searchLatestHost(idxOctet, position, strValue)
     searchBroadcast(latestHost)
+    
   }else{
     searchBroadcast()
     document.querySelector(".render-first_dec").innerHTML = document.querySelector(".render-netz_dec").innerHTML
     document.querySelector(".render-latest_bin").innerHTML = document.querySelector(".render-netz_bin").innerHTML
   document.querySelector(".render-latest_dec").innerHTML = document.querySelector(".render-netz_dec").innerHTML
   }
+  searchQuantityHosts()
 };
 
 const searchOctet = () => {
@@ -217,6 +219,12 @@ const searchBroadcast = (broadcast=octetsValue) => {
   document.querySelector(".render-broadcast_dec").innerHTML = broadcast.join("<p class='point'>.</p>") +
   "<p class='point'>/</p>" +
   prefixValue;
+}
+
+const searchQuantityHosts = ()=> {
+  const pow = 32 - +prefixValue
+  console.log(pow);
+  document.querySelector('.render-hosts_dec').innerHTML = (pow==0) ? 0 : Math.pow(2, pow)-2
 }
 
 for (let octet of octets) {
