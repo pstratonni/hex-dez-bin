@@ -1,9 +1,9 @@
-:root{
-  --text:#2f3d33;
-  --back:#b3c9b9;
-  --row:#96baa0;
-  --thead:#bde0c7;
-  --active:#1899d6;
+:root {
+  --text: #2f3d33;
+  --back: #b3c9b9;
+  --row: #96baa0;
+  --thead: #bde0c7;
+  --active: #1899d6;
 }
 
 body {
@@ -18,16 +18,18 @@ form {
   font-weight: bold;
 }
 
-.radio, .subnet_radio{
-display: none;
+.radio,
+.subnet_radio {
+  display: none;
 }
 
-.label,.label-sub{
+.label,
+.label-sub {
   cursor: pointer;
 }
 
-.active{
-  color :var(--active);
+.active {
+  color: var(--active);
 }
 
 .display {
@@ -238,6 +240,3 @@ button:hover {
 .cross {
   font-size: small;
 }
-
-
-

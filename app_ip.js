@@ -197,10 +197,10 @@ const searchNetz = (idx, position, octet) => {
   return netz;
 };
 
-const searchFirstHost = (netz, flag=false) => {
+const searchFirstHost = (netz, flag = false) => {
   netz[netz.length - 1] = +netz[netz.length - 1] + 1;
-  if (flag){
-    return netz
+  if (flag) {
+    return netz;
   }
   document.querySelector(".render-first_dec").innerHTML =
     netz.join("<p class='point'>.</p>") +
@@ -253,12 +253,16 @@ const searchLatestHost = (idxOctet, position, strValue) => {
   return latestHost;
 };
 
-const searchBroadcast = (broadcast = octetsValue, prefix = prefixValue, flag=false) => {
+const searchBroadcast = (
+  broadcast = octetsValue,
+  prefix = prefixValue,
+  flag = false
+) => {
   if (+prefix < 32) {
     broadcast[broadcast.length - 1] = +broadcast[broadcast.length - 1] + 1;
   }
-  if (flag){
-    return broadcast
+  if (flag) {
+    return broadcast;
   }
   document.querySelector(".render-broadcast_dec").innerHTML =
     broadcast.join("<p class='point'>.</p>") +
@@ -266,9 +270,9 @@ const searchBroadcast = (broadcast = octetsValue, prefix = prefixValue, flag=fal
     prefixValue;
 };
 
-const searchQuantityHosts = (flag=false) => {
+const searchQuantityHosts = (flag = false) => {
   const pow = 32 - +prefixValue;
-  if (flag){
+  if (flag) {
     return pow == 0 ? 0 : Math.pow(2, pow) - 2;
   }
   document.querySelector(".render-hosts_dec").innerHTML =
@@ -315,11 +319,11 @@ const searchSubnet = () => {
   const [idxOctetSub, positionSub] = searchOctet(+prefixValue + subPrefix);
   let strValue = "";
   let strValueSubNetId = "";
-  let valueSubNetId = 0
+  let valueSubNetId = 0;
   const strValueArr = [];
-  const networks = []
-  const tbody = document.querySelector(".subnet-content")
-  tbody.innerHTML = ""
+  const networks = [];
+  const tbody = document.querySelector(".subnet-content");
+  tbody.innerHTML = "";
   for (let i = idxOctet; i <= idxOctetSub; i++) {
     strValueArr.push(searchStrValue(octetsValue[i]));
   }
@@ -327,52 +331,63 @@ const searchSubnet = () => {
   for (let j = idxOctet * 8 + position; j < 8 + idxOctetSub * 8; j++) {
     zeros = zeros + "0";
   }
-  strValue = strValueArr.join("").slice(0,position) + zeros;
-  const zerosSub = zeros.slice((idxOctetSub - idxOctet)*8 + positionSub - position)
-  strValueSubNetId = strValue.slice(0,(idxOctetSub - idxOctet)*8 + positionSub)
-  valueSubNetId = parseInt(strValueSubNetId, 2)
-  renderSubnetBin(strValue, idxOctetSub, idxOctet, position, subPrefix)
-  for (let i=0; i<amountValue; i++){
-    strValueSubNetId = valueSubNetId.toString(2) + zerosSub
-    const octets = searchOctets(strValueSubNetId, idxOctetSub - idxOctet)
-    networks.push(searchSubNetID(idxOctet, idxOctetSub, octets))
-    const first = searchFirstHost([...networks[i]], true)
-    const latest = searchLatestSub([...networks[i]], idxOctetSub, zerosSub.length)
-    const broadcast = searchBroadcast([...latest], prefixValue + subPrefix, true)
+  strValue = strValueArr.join("").slice(0, position) + zeros;
+  const zerosSub = zeros.slice(
+    (idxOctetSub - idxOctet) * 8 + positionSub - position
+  );
+  strValueSubNetId = strValue.slice(
+    0,
+    (idxOctetSub - idxOctet) * 8 + positionSub
+  );
+  valueSubNetId = parseInt(strValueSubNetId, 2);
+  renderSubnetBin(strValue, idxOctetSub, idxOctet, position, subPrefix);
+  for (let i = 0; i < amountValue; i++) {
+    strValueSubNetId = valueSubNetId.toString(2) + zerosSub;
+    const octets = searchOctets(strValueSubNetId, idxOctetSub - idxOctet);
+    networks.push(searchSubNetID(idxOctet, idxOctetSub, octets));
+    const first = searchFirstHost([...networks[i]], true);
+    const latest = searchLatestSub(
+      [...networks[i]],
+      idxOctetSub,
+      zerosSub.length
+    );
+    const broadcast = searchBroadcast(
+      [...latest],
+      prefixValue + subPrefix,
+      true
+    );
     tbody.innerHTML += `<tr>
                           <td>${networks[i].join(".")}</td>
                           <td>${first.join(".")}</td>
                           <td>${latest.join(".")}</td>
                           <td>${broadcast.join(".")}</td>
-                        </tr>`
+                        </tr>`;
     valueSubNetId++;
   }
 };
 
 const searchSubNetID = (idxOctet, idxOctetSub, octets) => {
-  const network =[]
-  for (let i = 0; i<4; i++){
-    if (i<idxOctet){
-      network.push(octetsValue[i])
-    } else if (i>idxOctetSub){
-      network.push(0)
-    }
-    else {
-      network.push(octets[i-idxOctet])
+  const network = [];
+  for (let i = 0; i < 4; i++) {
+    if (i < idxOctet) {
+      network.push(octetsValue[i]);
+    } else if (i > idxOctetSub) {
+      network.push(0);
+    } else {
+      network.push(octets[i - idxOctet]);
     }
   }
-  return network
-}
+  return network;
+};
 
 const searchOctets = (strValueSubNetId, quantityOctets) => {
-  let octets = []
-  for (let i = 0; i <= quantityOctets; i++){
-   octets.unshift(parseInt(strValueSubNetId.slice(-8),2))
-   strValueSubNetId = strValueSubNetId.slice(0,strValueSubNetId.length-8)
-
+  let octets = [];
+  for (let i = 0; i <= quantityOctets; i++) {
+    octets.unshift(parseInt(strValueSubNetId.slice(-8), 2));
+    strValueSubNetId = strValueSubNetId.slice(0, strValueSubNetId.length - 8);
   }
-  return octets 
-}
+  return octets;
+};
 
 const searchSubPrefix = () => {
   let subPrefix = Math.log(+amountValue) / Math.log(2);
@@ -384,51 +399,75 @@ const searchSubPrefix = () => {
 };
 
 const searchLatestSub = (network, idx, length) => {
-  const latest = []
-  for (let i = 0; i<4; i++){
-    if (i<idx){latest.push(network[i])}
-    else if (i===idx){
-      let one = ""
-      for (let i = 0; i<length; i++){
-        one += "1"
+  const latest = [];
+  for (let i = 0; i < 4; i++) {
+    if (i < idx) {
+      latest.push(network[i]);
+    } else if (i === idx) {
+      let one = "";
+      for (let i = 0; i < length; i++) {
+        one += "1";
       }
-       latest.push(parseInt((+network[i].toString(2).slice(0,+network[i].toString(2).length-length) + one), 2))
+      latest.push(
+        parseInt(
+          +network[i]
+            .toString(2)
+            .slice(0, +network[i].toString(2).length - length) + one,
+          2
+        )
+      );
+    } else if (i === 3) {
+      latest.push("254");
+    } else {
+      latest.push("255");
     }
-    else if (i===3){latest.push("254")}
-    else {latest.push("255")}
   }
-  return latest
-}
+  return latest;
+};
 
-const renderSubnetBin = (strValue, idxOctetSub, idxOctet, position, subPrefix) =>{
-  let strOctets = ""
-  let netID =[]
-  for (let i = 0; i < strValue.length; i++){
-    if (i + 1 === position && (i+1) % 8 === 0){
-      strOctets +=strValue[i] + "<span class='blue-pipe'>|</span><p class='point'>.</p>"
-    }else if (i + 1 === position){
-      strOctets +=strValue[i] +  "<span class='blue-pipe'>|</span>"
-    }else if (i + 1 === position + subPrefix && (i+1) % 8 === 0){
-      strOctets +=strValue[i] +  (i===strValue.length-1 ? "<span class='red-pipe'>|</span>" : "<span class='red-pipe'>|</span><p class='point'>.</p>")
-    }else if (i + 1 === position + subPrefix) {
-      strOctets +=strValue[i] +  "<span class='red-pipe'>|</span>"
-    }else if ((i+1) % 8 === 0){
-      strOctets +=strValue[i] + (i===strValue.length-1 ? "" : "<p class='point'>.</p>")
-    }else{
-      strOctets +=strValue[i] 
+const renderSubnetBin = (
+  strValue,
+  idxOctetSub,
+  idxOctet,
+  position,
+  subPrefix
+) => {
+  let strOctets = "";
+  let netID = [];
+  for (let i = 0; i < strValue.length; i++) {
+    if (i + 1 === position && (i + 1) % 8 === 0) {
+      strOctets +=
+        strValue[i] + "<span class='blue-pipe'>|</span><p class='point'>.</p>";
+    } else if (i + 1 === position) {
+      strOctets += strValue[i] + "<span class='blue-pipe'>|</span>";
+    } else if (i + 1 === position + subPrefix && (i + 1) % 8 === 0) {
+      strOctets +=
+        strValue[i] +
+        (i === strValue.length - 1
+          ? "<span class='red-pipe'>|</span>"
+          : "<span class='red-pipe'>|</span><p class='point'>.</p>");
+    } else if (i + 1 === position + subPrefix) {
+      strOctets += strValue[i] + "<span class='red-pipe'>|</span>";
+    } else if ((i + 1) % 8 === 0) {
+      strOctets +=
+        strValue[i] +
+        (i === strValue.length - 1 ? "" : "<p class='point'>.</p>");
+    } else {
+      strOctets += strValue[i];
     }
   }
-  for (let i = 0; i < 4; i++){
-    if (i<idxOctet){
-      netID.push(octetsValue[i])
-    }else if (i===idxOctet){
-      netID.push(strOctets)
-    }else if (i> idxOctetSub){
-      netID.push("0")
+  for (let i = 0; i < 4; i++) {
+    if (i < idxOctet) {
+      netID.push(octetsValue[i]);
+    } else if (i === idxOctet) {
+      netID.push(strOctets);
+    } else if (i > idxOctetSub) {
+      netID.push("0");
     }
   }
-  document.querySelector(".ipv4_sub-bin").innerHTML = netID.join("<p class='point'>.</p>") + ` /${+prefixValue + subPrefix}`
-}
+  document.querySelector(".ipv4_sub-bin").innerHTML =
+    netID.join("<p class='point'>.</p>") + ` /${+prefixValue + subPrefix}`;
+};
 
 for (let octet of octets) {
   octet.addEventListener("input", addIPOctet);
